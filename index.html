@@ -97,5 +97,87 @@
     class PaymentFailed,PaymentTimeout,CancelReserv error
     class ShowSuccess success
     </div>
+     <h1>use case Diagram</h1>
+    <div class="mermaid">
+graph TB
+    %% Actors
+    Guest[👤 Guest/Client]
+    Admin[👨‍💼 Admin]
+    PaymentGW[💳 Payment Gateway]
+    
+    %% System boundary
+    subgraph "Hotel Reservation System"
+        %% Guest Use Cases
+        UC1[Search Établissement]
+        UC2[Browse by Location]
+        UC3[View Hotel Details]
+        UC4[View Room Categories]
+        UC5[View Room Details & Media]
+        UC6[Select Date & Time]
+        UC7[Make Reservation]
+        UC8[Process E-Payment]
+        UC9[Receive Confirmation]
+        UC10[View Booking History]
+        UC11[Download Receipt]
+        
+        %% Admin Use Cases
+        UC12[Manage Établissements]
+        UC13[Add/Update Rooms]
+        UC14[Set Room Categories]
+        UC15[Upload Room Media]
+        UC16[Configure Time Slots]
+        UC17[Manage Reservations]
+        UC18[View Payment Reports]
+        UC19[Update Room Availability]
+        
+        %% Payment Gateway Use Cases
+        UC20[Validate Payment]
+        UC21[Process Transaction]
+        UC22[Send Payment Confirmation]
+    end
+    
+    %% Guest Relationships
+    Guest --> UC1
+    Guest --> UC2
+    Guest --> UC3
+    Guest --> UC4
+    Guest --> UC5
+    Guest --> UC6
+    Guest --> UC7
+    Guest --> UC8
+    Guest --> UC9
+    Guest --> UC10
+    Guest --> UC11
+    
+    %% Admin Relationships
+    Admin --> UC12
+    Admin --> UC13
+    Admin --> UC14
+    Admin --> UC15
+    Admin --> UC16
+    Admin --> UC17
+    Admin --> UC18
+    Admin --> UC19
+    
+    %% Payment Gateway Relationships
+    PaymentGW --> UC20
+    PaymentGW --> UC21
+    PaymentGW --> UC22
+    
+    %% Include/Extend Relationships
+    UC7 -.->|includes| UC6
+    UC8 -.->|includes| UC7
+    UC9 -.->|includes| UC22
+    UC3 -.->|extends| UC1
+    UC4 -.->|includes| UC3
+    UC5 -.->|includes| UC4
+    
+    %% Styling
+    classDef actor fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef usecase fill:#f3e5f5,stroke:#4a148c,stroke-width:1px
+    classDef system fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    
+    class Guest,Admin,PaymentGW actor
+    </div>
   </body>
 </html>
